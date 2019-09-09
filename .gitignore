@@ -1,8 +1,8 @@
-*.zip
+﻿*.zip
 *.tar
 *.war
 *.jar
-
+.*
 target/
 classes/
 logs/
