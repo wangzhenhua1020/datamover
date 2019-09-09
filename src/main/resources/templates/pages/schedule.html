@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta th:include="base/resource :: header" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link th:href="@{/css/pages/schedule.css}" rel="stylesheet" type="text/css" />
+<script th:src="@{/js/pages/schedule.js}"></script>
+<title>调度管理</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row" style="line-height:50px;">
+			<div class="col-10"><h3><a th:href="@{/}">功能列表</a> / 调度管理</h3></div>
+			<div class="col-2 text-right">
+				<a id="reloadSchedule" href="javascript:void(0);">重新加载</a>
+				<a id="addSchedule" href="javascript:void(0);">新增</a>
+				<a id="refreshTable" href="javascript:void(0);">刷新</a>
+				<a href="javascript:history.go(-1);">返回</a>
+			</div>
+		</div>
+		<table id="scheduleTable"></table>
+	</div>
+</body>
+</html>

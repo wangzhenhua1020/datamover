@@ -1,0 +1,55 @@
+<div th:fragment="header">
+	<link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/bootstrap/bootstrap-table.min.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/bootstrap/bootstrap-datetimepicker.min.css?v=1.9.0}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/font-awesome/font-awesome.min.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/ztree/metroStyle.css?v=3.5.40}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/codemirror/codemirror.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/codemirror/themes/panda-syntax.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/common.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/fixed.css}" rel="stylesheet" type="text/css" />
+	<script th:src="@{/js/jquery/jquery-3.3.1.js}"></script>
+	<script th:src="@{/js/bootstrap/bootstrap.min.js?v=4.3.1}"></script>
+	<script th:src="@{/js/bootstrap/bootstrap-table.min.js?v=1.14.2}"></script>
+	<script th:src="@{/js/bootstrap/bootstrap-table-zh-CN.min.js?v=1.14.2}"></script>
+	<script th:src="@{/js/bootstrap/bootstrap-datetimepicker.min.js?v=2.4.4}"></script>
+	<script th:src="@{/js/bootstrap/bootstrap-datetimepicker.zh-CN.js?v=2.4.4}"></script>
+	<script th:src="@{/js/jquery/jquery.ztree.all.js?v=3.5.40}"></script>
+	<script th:src="@{/js/codemirror/codemirror.js?v=5.48.4}"></script>
+	<script th:src="@{/js/codemirror/mode/sql.js}"></script>
+	<script th:src="@{/js/codemirror/mode/shell.js}"></script>
+	<script th:src="@{/js/jquery/jquery.validate.min.js?v=1.19.1}"></script>
+	<script th:src="@{/js/jquery/jquery.validate.messages_zh.js?v=1.19.1}"></script>
+	<script th:src="@{/js/layer/layer.js?v=3.1.1}"></script>
+	<script type="text/javascript" th:inline="javascript">
+	var CONTEXT_PATH = $.trim(/*[[${#request.getContextPath()}]]*/'');
+	/* ajax 全局设置 */
+	$.ajaxSetup({
+		error: function(xhr, textStatus, errorThrown) {//处理后台异常
+			var data = eval('(' + xhr.responseText + ')') || {};
+			if (data.success) {
+				return;
+			}
+			layer.alert(data.message || '未知错误', {icon: 2});
+		}
+	});
+	/* 校验插件全局设置 */
+	$.validator.setDefaults({
+		errorElement: 'em',
+		errorPlacement: function(error, element) {
+			error.addClass('invalid-feedback');
+			if (element.prop('type') === 'checkbox') {
+				error.insertAfter(element.next( 'label'));
+			} else {
+				error.insertAfter(element);
+			}
+		},
+		highlight: function(element, errorClass, validClass) {
+			$(element).addClass('is-invalid').removeClass('is-valid');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).addClass('is-valid').removeClass('is-invalid');
+		}
+	});
+	</script>
+</div>

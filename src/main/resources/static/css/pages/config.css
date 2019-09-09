@@ -1,0 +1,95 @@
+#srcSqlHidden-error {
+	position: relative;
+	top: -60px;
+}
+
+#postDataHidden-error {
+	position: relative;
+	top: -20px;
+}
+
+.config-form {
+	position: relative;
+}
+
+.sqlviewer, .shellviewer {
+	width: 100%;
+	height: 100%;
+}
+
+.sqlviewer-bar {
+	width: 100%;
+	height: 38px;
+	line-height: 38px;
+	background-color: #f2f2f2;
+	padding-right: 30px;
+	
+}
+
+.sqlviewer-bar-btn {
+	color: #535353;
+	cursor: pointer;
+}
+
+.sqlviewer-bar-btn:hover {
+	color: #007bff;
+}
+
+.sqlviewer-bar-btn + .sqlviewer-bar-btn {
+	margin-left: 20px;
+}
+
+.sqlvar-cont {
+	min-height: 38px;
+	padding: 19px;
+}
+
+.sqlvar-row {
+	position: relative;
+}
+
+.sqlvar-row + .sqlvar-row {
+	margin-top: 15px;
+}
+
+.sqlvar-row.sqlvar-error * {
+	color: #dc3545 !important;
+	border-color: #dc3545 !important;
+}
+
+.sqlvar-row .sqlvar-name,
+.sqlvar-row .sqlvar-value,
+.sqlvar-row .sqlvar-remark {
+	width: 100px;
+	width: calc(100% - 80px);
+	margin-left: 10px;
+	height: 32px;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.sqlvar-row .sqlvar-remover {
+	position: absolute;
+	right: 10px;
+	top: 7px;
+	cursor: pointer;
+}
+
+.sqlvar-remover:hover {
+	color: #007bff;
+}
+
+.nodata {
+	padding-left: 10px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	color: #909090;
+}

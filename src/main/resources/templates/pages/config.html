@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta th:include="base/resource :: header" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link th:href="@{/css/pages/config.css}" rel="stylesheet" type="text/css" />
+<script th:src="@{/js/pages/config.js}"></script>
+<title>配置管理</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row" style="line-height:50px;">
+			<div class="col-10"><h3><a th:href="@{/}">功能列表</a> / 配置管理</h3></div>
+			<div class="col-2 text-right">
+				<a id="addConfig" href="javascript:void(0);">新增</a>
+				<a id="refreshTable" href="javascript:void(0);">刷新</a>
+				<a href="javascript:history.go(-1);">返回</a>
+			</div>
+		</div>
+		<form class="condition-form">
+			<div class="form-row">
+				<div class="form-group col-md-4 row">
+					<label class="col-3 col-form-label text-right" for="conditionName">配置名称</label>
+					<div class="col-8">
+						<input type="text" class="form-control" id="conditionName" placeholder="配置名称">
+					</div>
+				</div>
+				<div class="form-group col-md-4 row">
+					<label class="col-3 col-form-label text-right" for="conditionSrcDsName">源库名称</label>
+					<div class="col-8">
+						<input type="text" class="form-control" id="conditionSrcDsName" placeholder="源库名称">
+					</div>
+				</div>
+				<div class="form-group col-md-4 row">
+					<label class="col-3 col-form-label text-right" for="conditionDestDsName">目标库名称</label>
+					<div class="col-8">
+						<input type="text" class="form-control" id="conditionDestDsName" placeholder="目标库名称">
+					</div>
+				</div>
+			</div>
+		</form>
+		<table id="configTable"></table>
+	</div>
+</body>
+</html>

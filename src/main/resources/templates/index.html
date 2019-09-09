@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta th:include="base/resource :: header" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script th:src="@{/js/index.js}"></script>
+<title>数据迁移</title>
+</head>
+<body>
+	<h2>功能列表</h2>
+	<ul>
+		<li><a th:href="@{/config}">配置管理</a></li>
+		<li><a th:href="@{/schedule}">调度管理</a></li>
+		<li><a th:href="@{/track}">结果跟踪</a></li>
+		<li><a th:href="@{/template}">模板管理</a></li>
+		<li><a th:href="@{/datasource}">数据源管理</a></li>
+		<li><a th:href="@{/help}">使用帮助</a></li>
+	</ul>
+</body>
+</html>

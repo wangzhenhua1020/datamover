@@ -1,0 +1,61 @@
+
+/* layer修复 */
+.layui-layer-btn .layui-layer-btn0 {
+	color: #fff!important;
+}
+
+.layui-layer-btn .layui-layer-btn0,
+.layui-layer-btn .layui-layer-btn1 {
+	box-sizing: content-box;
+	font-size: 12px;
+}
+
+.layui-layer-title {
+	color: #fff;
+	font-weight: 600;
+	background-color: #1080e3;
+}
+
+.layui-layer-content {
+	height: calc(100% - 42px) !important;
+}
+
+/* bootstrap4 表单必填项 */
+.form-group.required > label:before {
+	content: "*";
+	color: red;
+	margin-right: 10px;
+}
+
+/* bootstrap4 validator修复 */
+.has-error .form-control {
+	border-color: #a94442;
+}
+.has-error input.form-control:focus {
+	outline-color: #a94442;
+}
+.has-error small {
+	color: #a94442;
+}
+
+/* bootstrap4 talbe修复 */
+.bootstrap-table .fixed-table-container .table thead th.detail {
+	width: 40px;
+}
+
+/* 日历修复 */
+.datetimepicker {
+	padding: 8px;
+}
+
+.glyphicon {
+	font-family: FontAwesome;
+}
+
+.glyphicon-arrow-left:before {
+	content: "\f060";
+}
+
+.glyphicon-arrow-right:before {
+	content: "\f061";
+}

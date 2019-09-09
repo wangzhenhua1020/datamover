@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta th:include="base/resource :: header" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script th:src="@{/js/pages/datasource.js}"></script>
+<title>调度管理</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row" style="line-height:50px;">
+			<div class="col-10"><h3><a th:href="@{/}">功能列表</a> / 数据源管理</h3></div>
+			<div class="col-2 text-right">
+				<a id="reloadDatasource" href="javascript:void(0);">重新加载</a>
+				<a id="addDatasource" href="javascript:void(0);">新增</a>
+				<a id="refreshTable" href="javascript:void(0);">刷新</a>
+				<a href="javascript:history.go(-1);">返回</a>
+			</div>
+		</div>
+		<table id="datasourceTable"></table>
+	</div>
+</body>
+</html>

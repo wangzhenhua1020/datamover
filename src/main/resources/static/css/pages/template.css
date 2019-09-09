@@ -1,0 +1,81 @@
+#contentHidden-error {
+	position: relative;
+	top: -60px;
+}
+
+.template-group-cont {
+	height: calc(100vh - 100px);
+}
+
+.template-group-btn {
+	color: #535353;
+	cursor: pointer;
+}
+
+.template-group-btn:hover {
+	color: #007bff;
+}
+
+.template-group-btn + .template-group-btn {
+	margin-left: 15px;
+}
+
+.sqlviewer {
+	width: 100%;
+	height: 100%;
+}
+
+.sqlviewer-bar {
+	width: 100%;
+	height: 38px;
+	line-height: 38px;
+	background-color: #f2f2f2;
+	padding-right: 30px;
+	
+}
+
+.sqlviewer-bar-btn {
+	color: #535353;
+	cursor: pointer;
+}
+
+.sqlviewer-bar-btn:hover {
+	color: #007bff;
+}
+
+.sqlviewer-bar-btn + .sqlviewer-bar-btn {
+	margin-left: 20px;
+}
+
+.nodata {
+	padding-left: 10px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	color: #909090;
+}
+
+.template-group-tree-cont.is-invalid {
+	border-color: #dc3545 !important;
+}
+
+.template-group-tree-cont.is-invalid:after {
+	position: absolute;
+	top: 7px;
+	right: 30px;
+	color: #dc3545;
+	font-family: FontAwesome;
+	content: "\f00d";
+}
+
+.template-group-tree-cont.is-valid {
+	border-color: #28a745 !important;
+}
+
+.template-group-tree-cont.is-valid:after {
+	position: absolute;
+	top: 7px;
+	right: 30px;
+	color: #28a745;
+	font-family: FontAwesome;
+	content: "\f00c";
+}

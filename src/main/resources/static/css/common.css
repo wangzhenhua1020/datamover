@@ -1,0 +1,45 @@
+table {
+	table-layout: fixed;
+}
+
+table th {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+table td {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.errorview {
+	padding: 15px;
+	white-space: pre-wrap;
+}
+
+.underline-none-link:hover {
+	cursor: pointer;
+	color: #0047cc;
+	text-decoration: none;
+}
+
+.ellipsis {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.overlay {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.condition-form {
+	margin-bottom: 20px;
+}

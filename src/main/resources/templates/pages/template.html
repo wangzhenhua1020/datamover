@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta th:include="base/resource :: header" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link th:href="@{/css/pages/template.css}" rel="stylesheet" type="text/css" />
+<script th:src="@{/js/pages/template.js}"></script>
+<title>模板管理</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row" style="line-height:50px;">
+			<div class="col-10"><h3><a th:href="@{/}">功能列表</a> / 模板管理</h3></div>
+			<div class="col-2 text-right">
+				<a id="addTemplate" href="javascript:void(0);">新增</a>
+				<a id="refreshTable" href="javascript:void(0);">刷新</a>
+				<a href="javascript:history.go(-1);">返回</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-3">
+				<div class="card template-group-cont">
+					<div class="card-header text-right">
+						<span class="template-group-btn" id="addGroupBtn">
+							<i class="fa fa-plus"></i> 添加
+						</span>
+						<span class="template-group-btn" id="updateGroupBtn">
+							<i class="fa fa-pencil"></i> 修改
+						</span>
+						<span class="template-group-btn" id="deleteGroupBtn">
+							<i class="fa fa-remove"></i> 删除
+						</span>
+					</div>
+					<div class="card-body">
+						<ul id="templateGroupTree" class="ztree"></ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-9">
+				<form class="condition-form">
+					<div class="form-row">
+						<div class="form-group col-md-4 row">
+							<label class="col-3 col-form-label text-right" for="conditionName">模板名称</label>
+							<div class="col-8">
+								<input type="text" class="form-control" id="conditionName" placeholder="模板名称">
+							</div>
+						</div>
+					</div>
+				</form>
+				<input id="groupPath" type="hidden" value="">
+				<table id="templateTable"></table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
