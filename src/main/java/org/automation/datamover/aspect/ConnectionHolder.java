@@ -32,8 +32,8 @@ public class ConnectionHolder {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	@Around("@annotation(wrapper)")
-	public Object cacheConnection(ProceedingJoinPoint joinpoint, ConnectionHelper wrapper) throws Throwable {
+	@Around("@annotation(helper)")
+	private Object cacheConnection(ProceedingJoinPoint joinpoint, ConnectionHelper helper) throws Throwable {
 		conns.put(Thread.currentThread(), sqlSessionTemplate.getConnection());
 		try {
 			Object[] args = joinpoint.getArgs();
@@ -43,6 +43,9 @@ public class ConnectionHolder {
 		}
 	}
 
+	/**
+	 * 根据当前线程关闭数据库连接
+	 */
 	public static void kill(Thread thread) {
 		Connection conn = conns.get(thread);
 		if (conn == null) {
@@ -51,6 +54,10 @@ public class ConnectionHolder {
 		synchronized (conn) {
 			try {
 				conn.rollback();
+			} catch (SQLException e) {
+				logger.warn("强制关闭连接前回滚事务出错", e);
+			}
+			try {
 				conn.close();
 			} catch (SQLException e) {
 				logger.warn("强制关闭连接出错", e);

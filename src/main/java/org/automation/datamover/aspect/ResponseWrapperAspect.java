@@ -21,7 +21,7 @@ public class ResponseWrapperAspect {
 	private static Logger logger = LoggerFactory.getLogger(ResponseWrapperAspect.class);
 
 	@Around("@annotation(wrapper)")
-	public Object processResponse(ProceedingJoinPoint joinpoint, ResponseWrapper wrapper) throws Throwable {
+	private Object processResponse(ProceedingJoinPoint joinpoint, ResponseWrapper wrapper) throws Throwable {
 		Object result = null;
 		try {
 			Object[] args = joinpoint.getArgs();
