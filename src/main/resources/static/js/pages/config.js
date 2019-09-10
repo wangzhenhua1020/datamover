@@ -694,7 +694,7 @@ $(function() {
 						existedVars.push(varName);
 						existedVarsSet[varName] = $var;
 					} else {
-						$var.addClass('sqlvar-error').attr('title', '该变量重复，请手动删除');;
+						$var.addClass('sqlvar-error').attr('title', '该变量重复，请手动删除');
 					}
 				});
 				$.each(vars, function(index, varName) {

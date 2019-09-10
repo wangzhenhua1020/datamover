@@ -20,7 +20,7 @@ public interface DataMoverService {
 	/**
 	 * 将数据由源库查出形成list
 	 */
-	List<Map<String, Object>> srcList(String sql);
+	List<Map<String, Object>> srcList(String sql, DataMoveBroadcaster broadcaster);
 
 	/**
 	 * 更新目标库

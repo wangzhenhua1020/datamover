@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.automation.datamover.bean.ConnectionHelper;
 import org.automation.datamover.bean.Constant;
 import org.automation.datamover.bean.ext.DataMoverConfigDetail;
 import org.automation.datamover.mapper.mover.DestDataMapper;
@@ -43,20 +44,25 @@ public class DataMoverServiceImpl implements DataMoverService {
 		return insertGroupCount == null || insertGroupCount <= 0 ? 500 : insertGroupCount;
 	}
 
+	@ConnectionHelper
 	@Transactional
 	public String srcUpdate(String sql, DataMoveBroadcaster broadcaster) {
+		checkBroadcaster(broadcaster);
 		Integer count = srcDataMapper.update(sql);
 		return "更新" + count + "条数据";
 	}
 
+	@ConnectionHelper
 	@Transactional
-	public List<Map<String, Object>> srcList(String sql) {
+	public List<Map<String, Object>> srcList(String sql, DataMoveBroadcaster broadcaster) {
+		checkBroadcaster(broadcaster);
 		return srcDataMapper.list(sql);
 	}
 
 	/**
 	 * 根据主键删除目标库中对应的记录，然后再进行insert
 	 */
+	@ConnectionHelper
 	@Transactional
 	public String destUpdate(List<Map<String, Object>> list, DataMoverConfigDetail config, DataMoveBroadcaster broadcaster) {
 		if (list == null || list.isEmpty()) {
@@ -66,17 +72,13 @@ public class DataMoverServiceImpl implements DataMoverService {
 		int deleteCount = 0;
 		int insertCount = 0;
 		if (config.getDestTableDeleteType() == Constant.DEST_TABLE_DELETE_TYPE_ALL) {//全部删除
+			checkBroadcaster(broadcaster);
 			deleteCount = destDataMapper.deleteAll(config.getDestTable());
 		} else if (!primaryKeys.isEmpty()) {//删除目标表对应记录
 			//批量删除方式（为防止一个SQL过长，进行拆分执行）
 			List<List<Map<String, Object>>> batchList = groupList(list, getDeleteGroupCount());
 			for (List<Map<String, Object>> rows: batchList) {
-				if (broadcaster.isTimeout()) {
-					throw new IllegalStateException("任务超时");
-				}
-				if (broadcaster.isStoped()) {
-					throw new IllegalStateException("手动停止");
-				}
+				checkBroadcaster(broadcaster);
 				if (config.getDestTableDeleteType() == Constant.DEST_TABLE_DELETE_TYPE_IN) {
 					deleteCount += destDataMapper.deleteByPkWithOrMethod(config.getDestTable(), primaryKeys, rows);
 				} else {
@@ -109,16 +111,12 @@ public class DataMoverServiceImpl implements DataMoverService {
 				|| "mysql".equalsIgnoreCase(config.getDestDs().getDbType())) {
 			List<List<Map<String, Object>>> batchList = groupList(list, getInsertGroupCount());
 			for (List<Map<String, Object>> rows: batchList) {
-				if (broadcaster.isTimeout()) {
-					throw new IllegalStateException("任务超时");
-				}
+				checkBroadcaster(broadcaster);
 				insertCount += destDataMapper.insertBatch(config.getDestTable(), columns, rows);
 			}
 		} else {
 			for (Map<String, Object> row: list) {
-				if (broadcaster.isTimeout()) {
-					throw new IllegalStateException("任务超时");
-				}
+				checkBroadcaster(broadcaster);
 				insertCount += destDataMapper.insert(config.getDestTable(), columns, row);
 			}
 		}
@@ -160,6 +158,15 @@ public class DataMoverServiceImpl implements DataMoverService {
 			primaryKeys.add(key);
 		}
 		return primaryKeys;
+	}
+
+	private void checkBroadcaster(DataMoveBroadcaster broadcaster) {
+		if (broadcaster.isTimeout()) {
+			throw new IllegalStateException("任务超时");
+		}
+		if (broadcaster.isStoped()) {
+			throw new IllegalStateException("手动停止");
+		}
 	}
 
 }

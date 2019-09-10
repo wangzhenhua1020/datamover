@@ -93,7 +93,7 @@ $(function() {
 			layer.close(index);
 		});
 
-	});;
+	});
 
 	$('#refreshTable').on('click', function() {
 		$('#scheduleTable').bootstrapTable('refresh');

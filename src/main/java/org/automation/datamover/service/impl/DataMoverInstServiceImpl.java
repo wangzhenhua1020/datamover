@@ -75,7 +75,7 @@ public class DataMoverInstServiceImpl implements DataMoverInstService {
 		Assert.isTrue(inst != null, "配置实例不存在");
 		Assert.isTrue(inst.getStatus() != null && inst
 				.getStatus().equals(Constant.STATUS_TASK_RUNNING), "配置实例未运行");
-		DataMoveWorker.markStoped(id);
+		DataMoveWorker.stop(id);
 		inst.setStatus(Constant.STATUS_TASK_FAIL);
 		inst.setMessage("手动停止");
 		Timestamp now = new Timestamp(System.currentTimeMillis());

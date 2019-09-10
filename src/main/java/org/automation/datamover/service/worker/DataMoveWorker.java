@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.automation.datamover.aspect.ConnectionHolder;
 import org.automation.datamover.bean.Constant;
 import org.automation.datamover.bean.db.DataMoverConfigVar;
 import org.automation.datamover.bean.db.DataMoverInst;
@@ -33,11 +34,13 @@ public class DataMoveWorker implements Runnable {
 
 	private static Map<Integer, DataMoveBroadcaster> broadcasters = Collections.synchronizedMap(new HashMap<>());
 
+	private static Map<Integer, Thread> threads = Collections.synchronizedMap(new HashMap<>());
+
 	private Integer instId;//运行实例ID
 
 	private Integer configId;//配置ID
 
-	private DataMoveBroadcaster broadcaster = new DataMoveBroadcaster();;//事件广播
+	private DataMoveBroadcaster broadcaster = new DataMoveBroadcaster();//事件广播
 
 	@Autowired
 	private DataMoverInstService dataMoverInstService;
@@ -60,6 +63,7 @@ public class DataMoveWorker implements Runnable {
 	public void run() {
 		try {
 			broadcasters.put(instId, broadcaster);
+			threads.put(instId, Thread.currentThread());
 			DataMoverConfigDetail config = getConfigDetail();
 			if (config == null) {
 				String message = "迁移配置[ " + configId + " ]不存在";
@@ -73,17 +77,19 @@ public class DataMoveWorker implements Runnable {
 			logger.error("instIdID：" + instId + ", 配置ID：" + configId + ", 错误描述：" + t.getMessage(), t);
 		} finally {
 			broadcasters.remove(instId);
+			threads.remove(instId);
 		}
 	}
 
 	/**
 	 * 并不一定能真正停止数据库正在执行的SQL
 	 */
-	public static void markStoped(Integer instId) {
+	public static void stop(Integer instId) {
 		DataMoveBroadcaster broadcaster = broadcasters.get(instId);
 		if (broadcaster != null) {
 			broadcaster.setStoped(true);
 		}
+		ConnectionHolder.kill(threads.get(instId));
 	}
 
 	private DataMoverConfigDetail getConfigDetail() {
@@ -203,7 +209,7 @@ public class DataMoveWorker implements Runnable {
 				List<Map<String, Object>> list = null;
 				if (DynamicDataSourceContextHolder.containsKey(config.getSrcDsId())) {
 					DynamicDataSourceContextHolder.setKey(config.getSrcDsId());
-					list = dataMoverService.srcList(data.getSql());
+					list = dataMoverService.srcList(data.getSql(), broadcaster);
 				} else {
 					throw new NullPointerException("数据源[ " + config.getSrcDsId() + " ]未加载");
 				}
@@ -326,7 +332,7 @@ public class DataMoveWorker implements Runnable {
 			logger.warn("配置实例[ " + instId + " ]不存在");
 			return;
 		}
-		if (inst.getMessage() != null) {
+		if (inst.getMessage() != null && !inst.getMessage().contains(message)) {
 			StringBuilder sb = new StringBuilder();
 			sb.append(inst.getMessage());
 			sb.append(inst.getMessage().isEmpty() ? "" : "\n\n");
