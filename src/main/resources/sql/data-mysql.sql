@@ -1,6 +1,6 @@
 -- 测试数据
-INSERT INTO `data_mover_datasource` VALUES (1, '北建接口库', 'mppdb', 'jdbc:postgresql://59.195.6.189:25308/adq_gldm', 'org.postgresql.Driver', 'adqbj', 'Sxbj@5tgb', NULL, 0, '2019-08-19 09:43:47', '2019-08-19 09:43:47', NULL);
-INSERT INTO `data_mover_datasource` VALUES (2, '睿呈展现库', 'mppdb', 'jdbc:postgresql://59.195.6.189:25308/adq_gldm', 'org.postgresql.Driver', 'adqrc', 'Sxrc@5tgb', NULL, 0, '2019-08-19 09:45:18', '2019-08-19 09:45:18', NULL);
+INSERT INTO `data_mover_datasource` VALUES (1, 'bj_if_db', 'mppdb', 'jdbc:postgresql://59.195.6.189:25308/adq_gldm', 'org.postgresql.Driver', 'adqbj', 'Sxbj@5tgb', NULL, 0, '2019-08-19 09:43:47', '2019-08-19 09:43:47', NULL);
+INSERT INTO `data_mover_datasource` VALUES (2, 'rc_view_db', 'mppdb', 'jdbc:postgresql://59.195.6.189:25308/adq_gldm', 'org.postgresql.Driver', 'adqrc', 'Sxrc@5tgb', NULL, 0, '2019-08-19 09:45:18', '2019-08-19 09:45:18', NULL);
 INSERT INTO `data_mover_datasource` VALUES (3, 'mysql_127.0.0.1', 'mysql', 'jdbc:mysql://127.0.0.1:3306/swc?useUnicode=true&characterEncoding=UTF-8', 'com.mysql.jdbc.Driver', 'root', 'root', NULL, 0, '2019-08-17 21:14:00', '2019-08-17 21:14:00', NULL);
 INSERT INTO `data_mover_datasource` VALUES (4, 'postgresql_127.0.0.1', 'postgres', 'jdbc:postgresql://127.0.0.1:5432/postgres', 'org.postgresql.Driver', 'postgres', 'postgres', NULL, 0, '2019-08-17 21:15:00', '2019-08-17 21:15:00', NULL);
 
