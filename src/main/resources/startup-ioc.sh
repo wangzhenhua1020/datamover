@@ -17,9 +17,7 @@ MAINPATH="$( cd -P "$( dirname "$TEMPPATH"  )" && pwd  )"
 # rm -f $MAINPATH/logs/*.log
 find $MAINPATH/logs -name "*.log" -mtime +1 | xargs rm -f
 
-# spring.datasource.db1 为程序数据存储库
-# spring.datasource.db2 为数据迁移源库
-# spring.datasource.db3 为数据迁移目标库
+# spring.datasource.primary 为程序数据存储库
 # spring.datasource.initialization-mode 是否初始化数据库：always: 始终执行初始化；embedded: 只初始化内存数据库（默认值）；never: 不执行初始化
 # jdbc:postgresql://59.195.6.189:25308/adq_gldm
 # adqbj/Sxbj@5tgb
