@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>mover</name>
+	<name>Data Mover</name>
 	<description>Data Mover project for Spring Boot</description>
 
 	<parent>
