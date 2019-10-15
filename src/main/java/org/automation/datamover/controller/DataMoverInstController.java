@@ -32,6 +32,13 @@ public class DataMoverInstController {
 		return dataMoverInstService.listByPage(qo);
 	}
 
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	@ResponseWrapper
+	@ResponseBody
+	Object get(Integer id) {
+		return dataMoverInstService.get(id);
+	}
+
 	@RequestMapping(value = "/stop", method = RequestMethod.GET)
 	@ResponseBody
 	void stop(Integer id) {

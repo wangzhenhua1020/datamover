@@ -42,7 +42,11 @@ $(function() {
 			formatter: function(value, row, index) {
 				if (value) {
 					errorMap[row.id] = value;
-					return '<a href="javascript:void(0);" class="error-message underline-none-link" data-track-id="' + row.id + '">' + value + '</a>';
+					var $a = $('<a/>').addClass('error-message underline-none-link')
+						.attr('href', 'javascript:void(0);')
+						.attr('data-track-id', row.id)
+						.text(value);
+					return $a[0].outerHTML;
 				}
 				return value;
 			}

@@ -95,8 +95,8 @@ CREATE TABLE `data_mover_inst` (
   `status` int(1) NOT NULL DEFAULT -1 COMMENT '本次更新状态：0 无; 1 成功; 2 失败; 3 进行中; 4 超时; 其他值 未知',
   `message` text COMMENT '更新日志',
   `data` text COMMENT '程序运行数据',
-  `start_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
-  `end_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `start_time` timestamp NULL DEFAULT NULL COMMENT '开始时间',
+  `end_time` timestamp NULL DEFAULT NULL COMMENT '结束时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间'
 );
