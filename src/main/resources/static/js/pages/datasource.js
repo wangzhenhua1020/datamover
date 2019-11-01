@@ -122,6 +122,7 @@ $(function() {
 				'<select class="mr-sm-2 custom-select db-type-select" id="dbType" name="dbType">' +
 				'<option value="mysql">MySQL</option>' +
 				'<option value="oracle">Oracle</option>' +
+				'<option value="gauss" class="d-none">GaussDB</option>' +
 				'<option value="sqlserver">SQL server</option>' +
 				'<option value="mppdb">MPPDB</option>' +
 				'<option value="postgres">PostgreSQL</option>' +
@@ -238,7 +239,9 @@ $(function() {
 				jdbcDriver = "com.mysql.jdbc.Driver";
 			} else if (dbTypeSelect === "oracle") {
 				jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-			} else if (dbTypeSelect === "sqlserver") {
+			} else if (dbTypeSelect === "gauss") {
+				jdbcDriver = "com.huawei.gauss.jdbc.ZenithDriver";
+			}else if (dbTypeSelect === "sqlserver") {
 				jdbcDriver = "com.microsoft.jdbc.sqlserver.SQLServerDriver";
 			} else if (dbTypeSelect === "mppdb") {
 				jdbcDriver = "org.postgresql.Driver";

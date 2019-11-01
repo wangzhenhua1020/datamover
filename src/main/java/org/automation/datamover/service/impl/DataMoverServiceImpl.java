@@ -48,8 +48,8 @@ public class DataMoverServiceImpl implements DataMoverService {
 	@Transactional
 	public String srcUpdate(String sql, DataMoveBroadcaster broadcaster) {
 		checkBroadcaster(broadcaster);
-		Integer count = srcDataMapper.update(sql);
-		return "更新" + count + "条数据";
+		srcDataMapper.update(sql);
+		return "执行成功";
 	}
 
 	@ConnectionHelper

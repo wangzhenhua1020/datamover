@@ -121,7 +121,7 @@ public class DataMoverDataSourceServiceImpl implements DataMoverDataSourceServic
 		if (dbType == null) {
 			return sql1;
 		}
-		if ("oracle".equalsIgnoreCase(dbType)) {
+		if ("oracle".equalsIgnoreCase(dbType) || "gauss".equalsIgnoreCase(dbType)) {
 			return sql2;
 		} else {
 			return sql1;
