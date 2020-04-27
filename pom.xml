@@ -92,6 +92,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>8.2.2.jre8</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+
+		<dependency>
 			<groupId>com.huawei.gauss</groupId>
 			<artifactId>com.huawei.gauss.jdbc.ZenithDriver</artifactId>
 			<version>GaussDB_100_1.0.0.B019</version>

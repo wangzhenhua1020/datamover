@@ -242,7 +242,7 @@ $(function() {
 			} else if (dbTypeSelect === "gauss") {
 				jdbcDriver = "com.huawei.gauss.jdbc.ZenithDriver";
 			}else if (dbTypeSelect === "sqlserver") {
-				jdbcDriver = "com.microsoft.jdbc.sqlserver.SQLServerDriver";
+				jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 			} else if (dbTypeSelect === "mppdb") {
 				jdbcDriver = "org.postgresql.Driver";
 			} else if (dbTypeSelect === "postgres") {
