@@ -1,7 +1,10 @@
 package org.automation.datamover.service.worker;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +38,10 @@ public class DataMoveWorker implements Runnable {
 	private static Map<Integer, DataMoveBroadcaster> broadcasters = Collections.synchronizedMap(new HashMap<>());
 
 	private static Map<Integer, Thread> threads = Collections.synchronizedMap(new HashMap<>());
+
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+	private static SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	private Integer instId;//运行实例ID
 
@@ -361,11 +368,150 @@ public class DataMoveWorker implements Runnable {
 		map.put("DEST_DS_USER", config.getDestDs() != null ? config.getDestDs().getJdbcUsername() : null);
 		map.put("DEST_DS_TABLE", config.getDestTable());
 		map.put("DEST_DS_TABLE_PK_JSON", config.getPrimaryKeyListJson());
-		map.put("SYSTEM_CURRENT_TIME", System.currentTimeMillis());
+		Date now = new Date();
+		map.put("SYSTEM_CURRENT_TIME", now.getTime());
+		map.put("SYSTEM_CURRENT_TIME_STR", timeFormat.format(now));
+		//本月第一天的日期字符串
+		map.put("DATETIME_CURRENT_MONTH_START_DATE", getCurrentMonthStartDateStr());
+		//本月最后一天的日期字符串
+		map.put("DATETIME_CURRENT_MONTH_END_DATE", getCurrentMonthEndDateStr());
+		//上月第一天的日期字符串
+		map.put("DATETIME_LAST_MONTH_START_DATE", getLastMonthStartDateStr());
+		//上月最后一天的日期字符串
+		map.put("DATETIME_LAST_MONTH_END_DATE", getLastMonthEndDateStr());
+		//本周第一天的日期字符串
+		map.put("DATETIME_CURRENT_WEEK_START_DATE", getCurrentWeekStartDateStr());
+		//本周最后一天的日期字符串
+		map.put("DATETIME_CURRENT_WEEK_END_DATE", getCurrentWeekEndDateStr());
+		//上周第一天的日期字符串
+		map.put("DATETIME_LAST_WEEK_START_DATE", getLastWeekStartDateStr());
+		//上周最后一天的日期字符串
+		map.put("DATETIME_LAST_WEEK_END_DATE", getLastWeekEndDateStr());
+		//当前小时的开始时间字符串
+		map.put("DATETIME_CURRENT_HOUR_START_TIME", getCurrentHourStartTimeStr());
+		//当前小时的结束时间字符串
+		map.put("DATETIME_CURRENT_HOUR_END_TIME", getCurrentHourEndTimeStr());
+		//上一小时的开始时间字符串
+		map.put("DATETIME_LAST_HOUR_START_TIME", getLastHourStartTimeStr());
+		//上一小时的结束时间字符串
+		map.put("DATETIME_LAST_HOUR_END_TIME", getLastHourEndTimeStr());
 		return map;
 	}
 
-	private String processTaskMessage(String message) {
+	private static String getCurrentMonthStartDateStr() {
+		Calendar cal = getCurrentMonth();
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getCurrentMonthEndDateStr() {
+		Calendar cal = getCurrentMonth();
+		cal.add(Calendar.MONTH, 1);
+		cal.add(Calendar.MILLISECOND, -1);
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getLastMonthStartDateStr() {
+		Calendar cal = getCurrentMonth();
+		cal.add(Calendar.MONTH, -1);
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getLastMonthEndDateStr() {
+		Calendar cal = getCurrentMonth();
+		cal.add(Calendar.MILLISECOND, -1);
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getCurrentWeekStartDateStr() {
+		Calendar cal = getCurrentDate();
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		if (day == 1) {//周日
+			cal.add(Calendar.DATE, -6);
+		} else {
+			cal.add(Calendar.DATE, 2 - day);
+		}
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getCurrentWeekEndDateStr() {
+		Calendar cal = getCurrentDate();
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		if (day != 1) {
+			cal.add(Calendar.DATE, 8 - day);
+		}
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getLastWeekStartDateStr() {
+		Calendar cal = getCurrentDate();
+		cal.add(Calendar.DATE, -7);
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		if (day == 1) {//周日
+			cal.add(Calendar.DATE, -6);
+		} else {
+			cal.add(Calendar.DATE, 2 - day);
+		}
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getLastWeekEndDateStr() {
+		Calendar cal = getCurrentDate();
+		cal.add(Calendar.DATE, -7);
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		if (day != 1) {
+			cal.add(Calendar.DATE, 8 - day);
+		}
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getCurrentHourStartTimeStr() {
+		Calendar cal = getCurrentHour();
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static String getCurrentHourEndTimeStr() {
+		Calendar cal = getCurrentHour();
+		cal.add(Calendar.HOUR, 1);
+		cal.add(Calendar.MILLISECOND, -1);
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static String getLastHourStartTimeStr() {
+		Calendar cal = getCurrentHour();
+		cal.add(Calendar.HOUR, -1);
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static String getLastHourEndTimeStr() {
+		Calendar cal = getCurrentHour();
+		cal.add(Calendar.MILLISECOND, -1);
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static Calendar getCurrentMonth() {
+		Calendar cal = getCurrentDate();
+		cal.set(Calendar.DATE, 1);
+		return cal;
+	}
+
+	private static Calendar getCurrentHour() {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return cal;
+	}
+
+	private static Calendar getCurrentDate() {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return cal;
+	}
+
+	private static String processTaskMessage(String message) {
 		int length = 10000;
 		if (message != null && message.length() > length) {
 			String ellipsis = " ...";
