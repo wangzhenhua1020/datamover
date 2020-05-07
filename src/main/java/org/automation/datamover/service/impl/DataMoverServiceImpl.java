@@ -80,9 +80,9 @@ public class DataMoverServiceImpl implements DataMoverService {
 			for (List<Map<String, Object>> rows: batchList) {
 				checkBroadcaster(broadcaster);
 				if (config.getDestTableDeleteType() == Constant.DEST_TABLE_DELETE_TYPE_IN) {
-					deleteCount += destDataMapper.deleteByPkWithOrMethod(config.getDestTable(), primaryKeys, rows);
-				} else {
 					deleteCount += destDataMapper.deleteByPkWithInMethod(config.getDestTable(), primaryKeys, rows);
+				} else {
+					deleteCount += destDataMapper.deleteByPkWithOrMethod(config.getDestTable(), primaryKeys, rows);
 				}
 			}
 			//单条删除方式
