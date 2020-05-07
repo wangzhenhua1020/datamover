@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# export JAVA_HOME=/opt/java/jdk1.8.0_72
+# export JAVA_HOME=/opt/java/jdk1.8.0_251
 # export CLASSPAHT=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 # export PATH=${JAVA_HOME}/bin:${PATH}
 
@@ -20,7 +20,7 @@ find $MAINPATH/logs -name "*.log" -mtime +1 | xargs rm -f
 # spring.datasource.primary 为程序数据存储库
 # spring.datasource.initialization-mode 是否初始化数据库：always: 始终执行初始化；embedded: 只初始化内存数据库（默认值）；never: 不执行初始化
 # datamover.thread.scheduler.pool-size 同时执行的任务线程个数
-nohup java -Xms4096m -Xmx8192m -Xmn1024m -server -XX:+HeapDumpOnOutOfMemoryError \
+nohup java -server -Duser.timezone=GMT+08 -Xms4096m -Xmx8192m -Xmn1024m -XX:+HeapDumpOnOutOfMemoryError \
 	-jar "$MAINPATH/datamover-0.0.1-SNAPSHOT.jar" \
 	--server.port=8087 \
 	--server.servlet.context-path="/datamover" \

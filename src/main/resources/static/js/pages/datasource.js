@@ -150,7 +150,7 @@ $(function() {
 				'<div class="form-group required row">' +
 				'<label for="jdbcPassword" class="col-sm-2 col-form-label text-right">密码</label>' +
 				'<div class="col-sm-6">' +
-				'<input type="text" class="form-control" id="jdbcPassword" name="jdbcPassword">' +
+				'<input type="password" class="form-control" id="jdbcPassword" name="jdbcPassword">' +
 				'</div>' +
 				'</div>' +
 				'<div class="form-group required row">' +
