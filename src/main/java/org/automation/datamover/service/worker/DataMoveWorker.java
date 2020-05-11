@@ -371,6 +371,22 @@ public class DataMoveWorker implements Runnable {
 		Date now = new Date();
 		map.put("SYSTEM_CURRENT_TIME", now.getTime());
 		map.put("SYSTEM_CURRENT_TIME_STR", timeFormat.format(now));
+		//本年第一天的日期字符串
+		map.put("DATETIME_CURRENT_YEAR_START_DATE", getCurrentYearStartDateStr());
+		//本年最后一天的日期字符串
+		map.put("DATETIME_CURRENT_YEAR_END_DATE", getCurrentYearEndDateStr());
+		//去年第一天的日期字符串
+		map.put("DATETIME_LAST_YEAR_START_DATE", getLastYearStartDateStr());
+		//去年最后一天的日期字符串
+		map.put("DATETIME_LAST_YEAR_END_DATE", getLastYearEndDateStr());
+		//本季度第一天的日期字符串
+		map.put("DATETIME_CURRENT_QUARTER_START_DATE", getCurrentQuarterStartDateStr());
+		//本季度最后一天的日期字符串
+		map.put("DATETIME_CURRENT_QUARTER_END_DATE", getCurrentQuarterEndDateStr());
+		//上季度第一天的日期字符串
+		map.put("DATETIME_LAST_QUARTER_START_DATE", getLastQuarterStartDateStr());
+		//上季度最后一天的日期字符串
+		map.put("DATETIME_LAST_QUARTER_END_DATE", getLastQuarterEndDateStr());
 		//本月第一天的日期字符串
 		map.put("DATETIME_CURRENT_MONTH_START_DATE", getCurrentMonthStartDateStr());
 		//本月最后一天的日期字符串
@@ -396,6 +412,64 @@ public class DataMoveWorker implements Runnable {
 		//上一小时的结束时间字符串
 		map.put("DATETIME_LAST_HOUR_END_TIME", getLastHourEndTimeStr());
 		return map;
+	}
+
+	private static String getCurrentYearStartDateStr() {
+		Calendar cal = getCurrentMonth();
+		int year = cal.get(Calendar.YEAR);
+		return year + "-01-01";
+	}
+
+	private static String getCurrentYearEndDateStr() {
+		Calendar cal = getCurrentMonth();
+		int year = cal.get(Calendar.YEAR);
+		return year + "-12-31";
+	}
+
+	private static String getLastYearStartDateStr() {
+		Calendar cal = getCurrentMonth();
+		int year = cal.get(Calendar.YEAR);
+		return (year - 1) + "-01-01";
+	}
+
+	private static String getLastYearEndDateStr() {
+		Calendar cal = getCurrentMonth();
+		int year = cal.get(Calendar.YEAR);
+		return (year - 1) + "-12-31";
+	}
+
+	private static String getCurrentQuarterStartDateStr() {
+		Calendar cal = getCurrentMonth();
+		int idx = cal.get(Calendar.MONTH) / 3;
+		cal.set(Calendar.MONTH, 3 * idx);
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getCurrentQuarterEndDateStr() {
+		Calendar cal = getCurrentMonth();
+		int idx = cal.get(Calendar.MONTH) / 3;
+		cal.set(Calendar.MONTH, 3 * idx);
+		cal.add(Calendar.MONTH, 3);
+		cal.add(Calendar.MILLISECOND, -1);
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getLastQuarterStartDateStr() {
+		Calendar cal = getCurrentMonth();
+		cal.add(Calendar.MONTH, -3);
+		int idx = cal.get(Calendar.MONTH) / 3;
+		cal.set(Calendar.MONTH, 3 * idx);
+		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getLastQuarterEndDateStr() {
+		Calendar cal = getCurrentMonth();
+		cal.add(Calendar.MONTH, -3);
+		int idx = cal.get(Calendar.MONTH) / 3;
+		cal.set(Calendar.MONTH, 3 * idx);
+		cal.add(Calendar.MONTH, 3);
+		cal.add(Calendar.MILLISECOND, -1);
+		return dateFormat.format(cal.getTime());
 	}
 
 	private static String getCurrentMonthStartDateStr() {
