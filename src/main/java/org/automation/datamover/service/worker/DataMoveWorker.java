@@ -403,6 +403,14 @@ public class DataMoveWorker implements Runnable {
 		map.put("DATETIME_LAST_WEEK_START_DATE", getLastWeekStartDateStr());
 		//上周最后一天的日期字符串
 		map.put("DATETIME_LAST_WEEK_END_DATE", getLastWeekEndDateStr());
+		//今天的开始时间字符串
+		map.put("DATETIME_TODAY_START_TIME", getTodayStartTimeStr());
+		//今天的结束时间字符串
+		map.put("DATETIME_TODAY_END_TIME", getTodayEndTimeStr());
+		//昨天的开始时间字符串
+		map.put("DATETIME_YESTERDAY_START_TIME", getYesterdayStartTimeStr());
+		//昨天的结束时间字符串
+		map.put("DATETIME_YESTERDAY_END_TIME", getYesterdayEndTimeStr());
 		//当前小时的开始时间字符串
 		map.put("DATETIME_CURRENT_HOUR_START_TIME", getCurrentHourStartTimeStr());
 		//当前小时的结束时间字符串
@@ -544,6 +552,30 @@ public class DataMoveWorker implements Runnable {
 			cal.add(Calendar.DATE, 8 - day);
 		}
 		return dateFormat.format(cal.getTime());
+	}
+
+	private static String getTodayStartTimeStr() {
+		Calendar cal = getCurrentDate();
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static String getTodayEndTimeStr() {
+		Calendar cal = getCurrentDate();
+		cal.add(Calendar.DATE, 1);
+		cal.add(Calendar.MILLISECOND, -1);
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static String getYesterdayStartTimeStr() {
+		Calendar cal = getCurrentDate();
+		cal.add(Calendar.DATE, -1);
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static String getYesterdayEndTimeStr() {
+		Calendar cal = getCurrentDate();
+		cal.add(Calendar.MILLISECOND, -1);
+		return timeFormat.format(cal.getTime());
 	}
 
 	private static String getCurrentHourStartTimeStr() {

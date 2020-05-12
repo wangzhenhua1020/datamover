@@ -219,9 +219,12 @@ $(function() {
 		});
 
 		$(".cron-expr-help").click(function() {
-			layer.alert("该属性为Quartz Cron表达式，表达式共7位，分别是：秒、分、时、月、星期、年，其中年为可选字段。" +
-					"例如：“0 0/5 * * * ?”，代表每隔5分钟执行一次。若想进一步了解，请百度搜索\"Quartz Cron 表达式\"",
-				{ icon: 3, maxWidth: 500 });
+			layer.alert("该属性为Spring Cron表达式，与Quartz Cron表达式类似。" +
+					"Quartz Cron表达式共7位，分别是：秒、分、时、月、星期、年，其中年为可选字段。" +
+					"这里要特别注意的是Spring Cron为6位，不支持年，其他位含义与Quartz Cron表达式相同。" +
+					"例如：“0 0/5 * * * ?”，代表每隔5分钟执行一次。" +
+					"由于Quartz Cron资料比Spring Cron更多，建议百度搜索\"Quartz Cron表达式\"做进一步了解。",
+				{ icon: 3, maxWidth: 550 });
 		});
 
 		$("#saveBtn").click(function () {

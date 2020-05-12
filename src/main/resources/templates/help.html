@@ -54,6 +54,10 @@
 								<li><span class="var-title">DATETIME_CURRENT_WEEK_END_DATE</span><span class="var-desc">本周最后一天的日期字符串（格式：yyyy-MM-dd）</span></li>
 								<li><span class="var-title">DATETIME_LAST_WEEK_START_DATE</span><span class="var-desc">上周第一天的日期字符串（格式：yyyy-MM-dd）</span></li>
 								<li><span class="var-title">DATETIME_LAST_WEEK_END_DATE</span><span class="var-desc">上周最后一天的日期字符串（格式：yyyy-MM-dd）</span></li>
+								<li><span class="var-title">DATETIME_TODAY_START_TIME</span><span class="var-desc">今天的开始时间字符串（格式：yyyy-MM-dd HH:mm:ss）</span></li>
+								<li><span class="var-title">DATETIME_TODAY_END_TIME</span><span class="var-desc">今天的结束时间字符串（格式：yyyy-MM-dd HH:mm:ss）</span></li>
+								<li><span class="var-title">DATETIME_YESTERDAY_START_TIME</span><span class="var-desc">昨天的开始时间字符串（格式：yyyy-MM-dd HH:mm:ss）</span></li>
+								<li><span class="var-title">DATETIME_YESTERDAY_END_TIME</span><span class="var-desc">昨天的结束时间字符串（格式：yyyy-MM-dd HH:mm:ss）</span></li>
 								<li><span class="var-title">DATETIME_CURRENT_HOUR_START_TIME</span><span class="var-desc">当前小时的开始时间字符串（格式：yyyy-MM-dd HH:mm:ss）</span></li>
 								<li><span class="var-title">DATETIME_CURRENT_HOUR_END_TIME</span><span class="var-desc">当前小时的结束时间字符串（格式：yyyy-MM-dd HH:mm:ss）</span></li>
 								<li><span class="var-title">DATETIME_LAST_HOUR_START_TIME</span><span class="var-desc">上一小时的开始时间字符串（格式：yyyy-MM-dd HH:mm:ss）</span></li>
@@ -78,8 +82,8 @@
 						</p>
 					</li>
 					<li>
-						<h4>调度管理 - CRON表达式</h4>
-						<p>定时调度表达式共7位，分别是：秒、分、时、月、星期、年，其中年为可选字段。下面为表达式的一些示例，可参照编写。</p>
+						<h4>调度管理 - Spring CRON表达式</h4>
+						<p>定时调度表达式共6位，分别是：秒、分、时、月、星期（与Quartz CON表达式不同之处在于不支持第7位年）。下面为表达式的一些示例，可参照编写。</p>
 						<table border="1" cellspacing="1" cellpadding="1">
 							<tr>
 								<th class="text-center">表示式</th>
@@ -96,14 +100,6 @@
 							<tr>
 								<td>0 15 10 * * ?</td>
 								<td>每天10:15运行</td>
-							</tr>
-							<tr>
-								<td>0 15 10 * * ? *</td>
-								<td>每天10:15运行</td>
-							</tr>
-							<tr>
-								<td>0 15 10 * * ? 2019</td>
-								<td>在2019年的每天10：15运行</td>
 							</tr>
 							<tr>
 								<td>0 * 14 * * ?</td>
@@ -140,10 +136,6 @@
 							<tr>
 								<td>0 15 10 ? * 6L</td>
 								<td>每月最后一个星期五10:15分运行。</td>
-							</tr>
-							<tr>
-								<td>0 15 10 ? * 6L 2019-2021</td>
-								<td>在2019,2020,2021年每个月的最后一个星期五的10:15分运行。</td>
 							</tr>
 							<tr>
 								<td>0 15 10 ? * 6#3</td>

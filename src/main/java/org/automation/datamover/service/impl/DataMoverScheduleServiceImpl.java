@@ -142,7 +142,7 @@ public class DataMoverScheduleServiceImpl implements DataMoverScheduleService {
 		try {
 			start(bean);
 		} catch(Exception e) {
-			throw new RuntimeException("调度任务无法启动，添加失败", e);
+			throw new RuntimeException("调度任务无法启动，添加失败：" + e.getMessage(), e);
 		}
 	}
 
