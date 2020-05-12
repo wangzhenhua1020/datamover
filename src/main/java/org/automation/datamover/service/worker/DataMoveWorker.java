@@ -411,6 +411,14 @@ public class DataMoveWorker implements Runnable {
 		map.put("DATETIME_LAST_HOUR_START_TIME", getLastHourStartTimeStr());
 		//上一小时的结束时间字符串
 		map.put("DATETIME_LAST_HOUR_END_TIME", getLastHourEndTimeStr());
+		//当前分钟的开始时间字符串
+		map.put("DATETIME_CURRENT_MINUTE_START_TIME", getCurrentMinuteStartTimeStr());
+		//当前分钟的结束时间字符串
+		map.put("DATETIME_CURRENT_MINUTE_END_TIME", getCurrentMinuteEndTimeStr());
+		//上一分钟的开始时间字符串
+		map.put("DATETIME_LAST_MINUTE_START_TIME", getLastMinuteStartTimeStr());
+		//上一分钟的结束时间字符串
+		map.put("DATETIME_LAST_MINUTE_END_TIME", getLastMinuteEndTimeStr());
 		return map;
 	}
 
@@ -562,6 +570,30 @@ public class DataMoveWorker implements Runnable {
 		return timeFormat.format(cal.getTime());
 	}
 
+	private static String getCurrentMinuteStartTimeStr() {
+		Calendar cal = getCurrentMinute();
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static String getCurrentMinuteEndTimeStr() {
+		Calendar cal = getCurrentMinute();
+		cal.add(Calendar.MINUTE, 1);
+		cal.add(Calendar.MILLISECOND, -1);
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static String getLastMinuteStartTimeStr() {
+		Calendar cal = getCurrentMinute();
+		cal.add(Calendar.MINUTE, -1);
+		return timeFormat.format(cal.getTime());
+	}
+
+	private static String getLastMinuteEndTimeStr() {
+		Calendar cal = getCurrentMinute();
+		cal.add(Calendar.MILLISECOND, -1);
+		return timeFormat.format(cal.getTime());
+	}
+
 	private static Calendar getCurrentMonth() {
 		Calendar cal = getCurrentDate();
 		cal.set(Calendar.DATE, 1);
@@ -571,6 +603,13 @@ public class DataMoveWorker implements Runnable {
 	private static Calendar getCurrentHour() {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return cal;
+	}
+
+	private static Calendar getCurrentMinute() {
+		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		return cal;
