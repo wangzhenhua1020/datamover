@@ -4,6 +4,8 @@ public class CommonDataSourceProperties {
 
 	private Integer maxWait;
 
+	private Integer maxActive;
+
 	private Integer timeBetweenEvictionRunsMillis;
 
 	private Integer minEvictableIdleTimeMillis;
@@ -24,6 +26,14 @@ public class CommonDataSourceProperties {
 
 	public void setMaxWait(Integer maxWait) {
 		this.maxWait = maxWait;
+	}
+
+	public Integer getMaxActive() {
+		return maxActive;
+	}
+
+	public void setMaxActive(Integer maxActive) {
+		this.maxActive = maxActive;
 	}
 
 	public Integer getTimeBetweenEvictionRunsMillis() {

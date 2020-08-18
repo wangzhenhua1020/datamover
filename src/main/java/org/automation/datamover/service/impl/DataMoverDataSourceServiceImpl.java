@@ -64,6 +64,7 @@ public class DataMoverDataSourceServiceImpl implements DataMoverDataSourceServic
 			ds.setPassword(info.getJdbcPassword());
 			//数据源属性设置
 			ds.setMaxWait(commonDataSourceProperties.getMaxWait());
+			ds.setMaxActive(commonDataSourceProperties.getMaxActive());
 			ds.setTimeBetweenEvictionRunsMillis(commonDataSourceProperties.getTimeBetweenEvictionRunsMillis());
 			ds.setMinEvictableIdleTimeMillis(commonDataSourceProperties.getMinEvictableIdleTimeMillis());
 			if (info.getTestSql() != null && !info.getTestSql().isEmpty()) {

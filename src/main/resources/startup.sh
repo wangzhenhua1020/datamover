@@ -41,6 +41,7 @@ nohup java -server -Duser.timezone=GMT+08 -Xms4096m -Xmx8192m -Xmn1024m -XX:+Hea
 	--spring.datasource.primary.test-on-return=false \
 	--spring.datasource.primary.break-after-acquire-failure=true \
 	--spring.datasource.common.max-wait=60000 \
+	--spring.datasource.common.max-active=20 \
 	--datamover.dest.group-count.delete=999 \
 	--datamover.dest.group-count.insert=500 \
 	--datamover.thread.scheduler.pool-size=100 \
